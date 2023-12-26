@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+   <meta name="viewport" content="width=1700"> <!-- 设置一个较大的宽度，例如1200px -->
+  <title>京东</title>
+  <script src="jquery-3.6.4.min.js"></script>
+  <style>
+
+  <style>
+  
+  
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f0f0;
+	  
+    }
+    .brand-logo, .search-bar, .shopping-cart {
+      display: flex;
+      align-items: center;
+      margin: 0 10px;
+    }
+    .search-bar {
+      flex: 1;
+    }
+    header {
+      background-color: #ffffff;
+      color: #fff;
+      text-align: center;
+      padding: 10px;
+      display: flex;
+      height: 110px;
+      border-bottom: 1px solid #f0f0f0;
+	max-width:1650px;
+    }
+    .brand-logo img {
+      height: 110px;
+      margin-left: 40%;
+      margin-right: auto;
+	  cursor: pointer;
+    }
+    .search-bar {
+      max-width: auto;
+      display: flex;
+      justify-content: center;
+      margin-left: 120px;
+      margin-right: 0px;
+	  
+    }
+    .search-bar input[type="text"] {
+      width: 65%;
+      height: 30px;
+	   margin-left: 110px;
+      margin-right: 35px;
+    }
+    .search-bar button {
+      font-size: 18px;
+      padding: 5px 10px;
+      border: 1px solid #ccc;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      background-color: #e1251b;
+	  margin-right:30px;
+	  
+    }
+    .search-bar button:hover {
+      background-color: #c81623;
+	  
+    }
+    .container {
+      position: relative;
+      background-color: #ffffff;
+    }
+    nav {
+      background-color: #ddd;
+      padding: 0.9px;
+      width: 120px;
+      height: auto;
+	  margin:0px;
+    }
+    nav a {
+      color: #333;
+      text-decoration: none;
+      padding: 5px;
+      display: block;
+      font-size: 12px;
+	  margin:0px;
+	  
+    }
+    .content {
+      padding: 10px;
+      flex: 1;
+    }
+    .submenu {
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 10px;
+      position: absolute;
+      left: 100%;
+      top: 0;
+      display: none;
+      width: 200px;
+    }
+    .submenu a {
+      color: #333;
+      text-decoration: none;
+      display: inline-block;
+      padding: 5px 10px;
+      margin-right: 10px;
+    }
+    .container:hover {
+      background-color: #ccc;
+    }
+    .submenu a:hover {
+      color: pink;
+    }
+    .container a:hover {
+      color: red;
+    }
+    .shopping-cart {
+	 
+      display: flex;
+      align-items: center;
+      margin-right: 200px;
+      margin-left: 0px;
+	  
+    }
+    
+    .shopping-cart-text {
+      background-color: #f0f0f0;
+      color: #e1251b;
+      padding: 5px;
+      border-radius: 5px;
+      margin-left: 10px;
+      cursor: pointer;
+	  
+    }
+    .shopping-cart-text:hover {
+      color: #c81623;
+    }
+	
+    .fucking {
+      display: flex;
+	
+    }
+    .damn1 {
+	max-width:300px;
+      flex: 1;
+  border: 0px solid #ccc;
+  padding: 20px;
+  position: relative;
+  box-sizing: border-box; /* 防止 padding 影响元素宽度和高度 */
+  margin-left:90px;
+  
+  z-index: 2; /* 设置更高的 z-index 值，确保在最上层显示 */
+    }
+	.damn2 {
+      flex: 1;
+	  max-width:840px;
+  border: 0px solid #ccc;
+  padding: 20px;
+  position: relative;
+  box-sizing: border-box; /* 防止 padding 影响元素宽度和高度 */
+  }
+	 .damn2 img {
+      max-width: 100%; /* 设置图片的最大宽度为其容器的宽度 */
+      max-height: 100%; /* 设置图片的最大高度为其容器的高度 */
+	  cursor: pointer;
+
+    }
+	 .damn3 {
+      flex: 1;
+      max-width: 840px;
+      max-height: 300px;
+      border: 0px solid #ccc;
+      
+      position: relative;
+      box-sizing: border-box;
+      overflow: hidden; /* 隐藏溢出内容 */
+      display: flex; /* 使用 flex 创建水平布局 */
+    }
+
+    .damn3 img {
+  max-width: 100%; /* 设置图片的最大宽度 */
+  max-height: 200px; /* 设置图片的最大高度，调整这个值以获得所需的尺寸 */
+  object-fit: cover; /* 保持宽高比并覆盖容器 */
+  margin-right: 10px; /* 在图片之间添加一些间距 */
+  
+}
+	
+	
+	
+	
+	
+.swl {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  font-size: 20px;
+  color: white;
+  background-color: #333;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 1; /* 保证按钮在图片上面 */
+}
+
+/* 右侧切换按钮样式 */
+.swr {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  font-size: 20px;
+  color: white;
+  background-color: #333;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 1; /* 保证按钮在图片上面 */
+}
+<!-- 多张图片切换 -->
+ .slider-container {
+      position: relative;
+      overflow: hidden;
+      width: 600px;
+      height: 450px;
+	  
+	  
+    }
+
+    .slider {
+      position: relative;
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .slider img {
+      weight: auto;
+      height: auto;
+      object-fit: cover;
+      cursor: pointer;
+      transition: transform 0.3s ease-in-out;
+	  
+    }
+
+    .slider img:hover {
+      transform: scale(1.1);
+    }
+
+    .nav-btn {
+	
+      position: absolute;
+      top: 10px;
+      padding: 8px 15px; /* Adjust based on your preference */
+      background-color: #222; /* Change to your preferred background color */
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: opacity 0.3s ease-in-out;
+      font-size: 12px; /* Adjust based on your preference */
+      font-weight: bold; /* Add a bold font weight */
+      z-index: 1;
+    }
+
+    .nav-btn:hover {
+      opacity: 1;
+    }
+
+    .prev-btn {
+      left: 10px;
+	   position: absolute;
+  top: 50%;
+  
+  transform: translateY(-50%);
+    }
+
+    .next-btn {
+      right: 10px;
+	  top: 50%;
+  
+  transform: translateY(-50%);
+    }
+  </style>
+
+
+</head>
+<body>
+
+<header>
+   
+  <div class="brand-logo">
+    <img src="logo.png" alt="品牌Logo" id="logo">
+  </div>
+
+  <div class="search-bar">
+    <input type="text" placeholder="搜索...">
+   <button type="button" id="searchButton">搜索</button>
+  </div>
+   <div class="shopping-cart">
+      <!-- 添加购物车文字 -->
+      <span class="shopping-cart-text" id="shoppingCart">🛒我的购物车</span>
+      <!-- 你还可以添加更多内容，如购物车中物品的数量等 -->
+  </div>
+	
+
+  <div class="header">
+    
+  </div>
+</header>
+  
+
+
+  <div class="fucking">
+  <div class="damn1">
+  
+    <nav>
+   <div class="container">
+      <a href="#">家用电器</a>
+	  
+      <div class="submenu">
+        <div class="container">
+          <a href="#">电视</a>
+		  
+		  
+		  <div class="submenu">
+		  
+	<div class="container">
+		  <a href="#">游戏电视</a>
+          <a href="#">艺术电视</a>
+          <a href="#">K歌电视</a>
+          <a href="#">miniled电视</a>
+          <a href="#">会议电视</a>
+          <a href="#">电视音响套装</a>
+          <a href="#">75寸电视</a>
+          <a href="#">85寸电视</a>
+          <a href="#">98寸电视</a>
+          <a href="#">100寸电视</a>
+          <a href="#">电视挂架</a>
+          <a href="#">电视遥控器</a>
+          <a href="#">电视推车</a>
+		  </div>
+        </div>
+		</div> <div class="container">
+          <a href="#">洗衣机</a>
+		  <div class="submenu">
+		  <div class="container">
+		   <a href="#">滚筒洗衣机</a>
+            <a href="#">洗烘一体机</a>
+            <a href="#">波轮洗衣机</a>
+            <a href="#">洗烘套装</a>
+            <a href="#">迷你洗衣机</a>
+            <a href="#">洗衣机配件</a>
+            <a href="#">烘干机</a>
+		
+		</div>
+		</div>
+		</div>
+	 </div>
+	  </div>
+		
+ 
+	 <div class="container">
+   <a href="#">手机 / 运营商 / 数码</a>
+   <!-- Add Submenu for 手机 / 运营商 / 数码 -->
+   <div class="submenu">
+      <div class="container">
+         <a href="#">手机</a>
+         <div class="submenu">
+            <div class="container">
+               <a href="#">智能手机</a>
+               <a href="#">老人手机</a>
+               <!-- Add more submenu items as needed -->
+            </div>
+         </div>
+      </div>
+      <div class="container">
+         <a href="#">运营商</a>
+         <!-- Add submenu items for 运营商 as needed -->
+      </div>
+      <div class="container">
+         <a href="#">数码</a>
+         <!-- Add submenu items for 数码 as needed -->
+      </div>
+   </div>
+</div>
+
+<!-- Repeat the above structure for other categories -->
+
+<div class="container">
+   <a href="#">电脑 / 办公</a>
+   <!-- Add Submenu for 电脑 / 办公 -->
+   <div class="submenu">
+      <div class="container">
+         <a href="#">笔记本电脑</a>
+         <div class="submenu">
+            <div class="container">
+               <a href="#">轻薄本</a>
+               <a href="#">游戏本</a>
+               <!-- Add more submenu items as needed -->
+            </div>
+         </div>
+      </div>
+      <div class="container">
+         <a href="#">台式电脑</a>
+         <!-- Add submenu items for 台式电脑 as needed -->
+      </div>
+      <div class="container">
+         <a href="#">办公用品</a>
+         <!-- Add submenu items for 办公用品 as needed -->
+      </div>
+   </div>
+</div>
+	 <div class="container">
+   <a href="#">家居 / 家具 / 家装 / 厨具</a>
+   <!-- Add Submenu for 家居 / 家具 / 家装 / 厨具 -->
+   <div class="submenu">
+      <div class="container">
+         <a href="#">家具</a>
+         <div class="submenu">
+            <div class="container">
+               <a href="#">沙发</a>
+               <a href="#">床</a>
+               <!-- Add more submenu items as needed -->
+            </div>
+         </div>
+      </div>
+      <div class="container">
+         <a href="#">厨具</a>
+         <!-- Add submenu items for 厨具 as needed -->
+      </div>
+      <!-- Add more submenu items for 家居 / 家装 as needed -->
+   </div>
+</div>
+	  <div class="container">
+   <a href="#">男装 / 女装 / 童装 / 内衣</a>
+   <div class="submenu">
+      <div class="container">
+         <a href="#">男装</a>
+         <div class="submenu">
+            <div class="container">
+               <a href="#">T恤</a>
+               <a href="#">衬衫</a>
+               
+            </div>
+         </div>
+      </div>
+      <div class="container">
+         <a href="#">女装</a>
+         <div class="submenu">
+            <div class="container">
+               <a href="#">连衣裙</a>
+               <a href="#">毛线衫</a>
+               
+            </div>
+         </div>
+      </div>
+      <div class="container">
+         <a href="#">童装</a>
+          <div class="submenu">
+      <div class="container">
+         <a href="#">婴儿服</a>
+         <a href="#">儿童裤</a>
+         
+      </div>
+   </div>
+      </div>
+      <div class="container">
+         <a href="#">内衣</a>
+         <div class="submenu">
+      <div class="container">
+         <a href="#">文胸</a>
+         <a href="#">内裤</a>
+         <!-- 添加更多子子菜单项 -->
+      </div>
+   </div>
+      </div>
+      <!-- Add more submenu items for 男装 / 女装 / 童装 / 内衣 as needed -->
+   </div>
+</div>
+	  
+	  <div class="container">
+    <a href="#">美妆 / 个护清洁 / 宠物</a>
+    <!-- 添加 美妆 / 个护清洁 / 宠物 的子菜单 -->
+    <div class="submenu">
+      <div class="container">
+        <a href="#">美妆</a>
+        <div class="submenu">
+          <div class="container">
+            <a href="#">面部护肤</a>
+            <a href="#">彩妆</a>
+            <!-- 根据需要添加更多子菜单项 -->
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <a href="#">个护清洁</a>
+        <!-- 根据需要添加 个护清洁 的子菜单项 -->
+      </div>
+      <div class="container">
+        <a href="#">宠物</a>
+        <div class="submenu">
+          <div class="container">
+            <a href="#">狗粮</a>
+            <a href="#">猫粮</a>
+            <!-- 根据需要添加更多子菜单项 -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+	 <div class="container">
+    <a href="#">女鞋 / 箱包 / 钟表 / 珠宝</a>
+    <!-- 添加 女鞋 / 箱包 / 钟表 / 珠宝 的子菜单 -->
+    <div class="submenu">
+      <div class="container">
+        <a href="#">女鞋</a>
+        <div class="submenu">
+          <div class="container">
+            <a href="#">高跟鞋</a>
+            <a href="#">运动鞋</a>
+            <a href="#">平底鞋</a>
+            <!-- 根据需要添加更多女鞋子菜单项 -->
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <a href="#">箱包</a>
+        <div class="submenu">
+          <div class="container">
+            <a href="#">手提包</a>
+            <a href="#">背包</a>
+            <a href="#">钱包</a>
+            <!-- 根据需要添加更多箱包子菜单项 -->
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <a href="#">钟表</a>
+        <div class="submenu">
+          <div class="container">
+            <a href="#">手表</a>
+            <a href="#">挂钟</a>
+            <!-- 根据需要添加更多钟表子菜单项 -->
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <a href="#">珠宝</a>
+        <div class="submenu">
+          <div class="container">
+            <a href="#">项链</a>
+            <a href="#">戒指</a>
+            <a href="#">耳环</a>
+            <!-- 根据需要添加更多珠宝子菜单项 -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+	  <div class="container">
+   <a href="#">男鞋 / 运动 / 户外</a>
+   <!-- 添加 男鞋 / 运动 / 户外 的子菜单 -->
+   <div class="submenu">
+      <div class="container">
+         <a href="#">男鞋</a>
+         <div class="submenu">
+            <div class="container">
+               <a href="#">运动鞋</a>
+               <a href="#">休闲鞋</a>
+               <a href="#">商务鞋</a>
+               
+            </div>
+         </div>
+      </div>
+      <div class="container">
+         <a href="#">运动</a>
+         <div class="submenu">
+            <div class="container">
+               <a href="#">跑步</a>
+               <a href="#">篮球</a>
+               <a href="#">足球</a>
+               <!-- 根据需要添加更多运动商品子菜单项 -->
+            </div>
+         </div>
+      </div>
+      <div class="container">
+         <a href="#">户外</a>
+         <div class="submenu">
+            <div class="container">
+               <a href="#">登山</a>
+               <a href="#">露营</a>
+               <a href="#">骑行</a>
+               <!-- 根据需要添加更多户外商品子菜单项 -->
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+	  <div class="container">
+   <a href="#">房产 / 汽车 / 汽车用品</a>
+   <!-- 添加 房产 / 汽车 / 汽车用品 的子菜单 -->
+   <div class="submenu">
+      <div class="container">
+         <a href="#">房产</a>
+         <div class="submenu">
+            <div class="container">
+               <a href="#">新房</a>
+               <a href="#">二手房</a>
+               <a href="#">公寓</a>
+               <!-- 根据需要添加更多房产商品子菜单项 -->
+            </div>
+         </div>
+      </div>
+      <div class="container">
+         <a href="#">汽车</a>
+         <div class="submenu">
+            <div class="container">
+               <a href="#">轿车</a>
+               <a href="#">SUV</a>
+               <a href="#">卡车</a>
+               <!-- 根据需要添加更多汽车商品子菜单项 -->
+            </div>
+         </div>
+      </div>
+      <div class="container">
+         <a href="#">汽车用品</a>
+         <div class="submenu">
+            <div class="container">
+               <a href="#">座套</a>
+               <a href="#">香水</a>
+               <a href="#">车载充电器</a>
+               <!-- 根据需要添加更多汽车用品子菜单项 -->
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+	  <div class="container">
+  <a href="#">母婴 / 玩具乐器</a>
+  <!-- 添加 母婴 / 玩具乐器 的子菜单 -->
+  <div class="submenu">
+    <div class="container">
+      <a href="#">奶粉</a>
+      <div class="submenu">
+        <div class="container">
+          <a href="#">婴儿奶粉</a>
+          <a href="#">幼儿奶粉</a>
+          <!-- 根据需要添加更多奶粉子菜单项 -->
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <a href="#">尿片</a>
+      <!-- 根据需要添加 尿片 的子菜单项 -->
+    </div>
+    <div class="container">
+      <a href="#">玩具</a>
+      <div class="submenu">
+        <div class="container">
+          <a href="#">益智玩具</a>
+          <a href="#">娃娃玩具</a>
+          <!-- 根据需要添加更多玩具子菜单项 -->
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <a href="#">孕妇用品</a>
+      <!-- 根据需要添加 孕妇用品 的子菜单项 -->
+    </div>
+  </div>
+</div>
+	 <div class="container">
+  <a href="#">食品 / 酒类 / 生鲜 / 特产</a>
+  <!-- 添加 食品 / 酒类 / 生鲜 / 特产 的子菜单 -->
+  <div class="submenu">
+    <div class="container">
+      <a href="#">零食</a>
+      <div class="submenu">
+        <div class="container">
+          <a href="#">坚果</a>
+          <a href="#">糖果</a>
+          <!-- 根据需要添加更多零食子菜单项 -->
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <a href="#">酒类</a>
+      <div class="submenu">
+        <div class="container">
+          <a href="#">红酒</a>
+          <a href="#">白酒</a>
+          <!-- 根据需要添加更多酒类子菜单项 -->
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <a href="#">生鲜食材</a>
+      <!-- 根据需要添加 生鲜食材 的子菜单项 -->
+    </div>
+    <div class="container">
+      <a href="#">地方特产</a>
+      <div class="submenu">
+        <div class="container">
+          <a href="#">四川特产</a>
+          <a href="#">广东特产</a>
+          <!-- 根据需要添加更多地方特产子菜单项 -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+	  <div class="container">
+  <a href="#">艺术 / 礼品鲜花 / 农牧园艺</a>
+  <!-- 添加 艺术 / 礼品鲜花 / 农牧园艺 的子菜单 -->
+  <div class="submenu">
+    <div class="container">
+      <a href="#">绘画</a>
+      <div class="submenu">
+        <div class="container">
+          <a href="#">油画</a>
+          <a href="#">水彩画</a>
+          <!-- 根据需要添加更多绘画子菜单项 -->
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <a href="#">雕塑</a>
+      <!-- 根据需要添加 雕塑 的子菜单项 -->
+    </div>
+    <div class="container">
+      <a href="#">礼品鲜花</a>
+      <div class="submenu">
+        <div class="container">
+          <a href="#">鲜花花束</a>
+          <a href="#">永生花</a>
+          <!-- 根据需要添加更多礼品鲜花子菜单项 -->
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <a href="#">农牧园艺</a>
+      <div class="submenu">
+        <div class="container">
+          <a href="#">园艺工具</a>
+          <a href="#">植物种子</a>
+          <!-- 根据需要添加更多农牧园艺子菜单项 -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+	  <div class="container">
+  <a href="#">医药保健 / 计生情趣</a>
+  <!-- 添加 医药保健 / 计生情趣 的子菜单 -->
+  <div class="submenu">
+    <div class="container">
+      <a href="#">中成药</a>
+      <div class="submenu">
+        <div class="container">
+          <a href="#">感冒药</a>
+          <a href="#">消炎药</a>
+          <!-- 根据需要添加更多中成药子菜单项 -->
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <a href="#">保健品</a>
+      <!-- 根据需要添加 保健品 的子菜单项 -->
+    </div>
+    <div class="container">
+      <a href="#">营养食品</a>
+      <div class="submenu">
+        <div class="container">
+          <a href="#">维生素</a>
+          <a href="#">蛋白质补充剂</a>
+          <!-- 根据需要添加更多营养食品子菜单项 -->
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <a href="#">计生情趣</a>
+      <div class="submenu">
+        <div class="container">
+          <a href="#">避孕药</a>
+          <a href="#">情趣用品</a>
+          <!-- 根据需要添加更多计生情趣子菜单项 -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+	 <div class="container">
+  <a href="#">图书 / 文娱 / 教育 / 电子书</a>
+  <!-- 添加 图书 / 文娱 / 教育 / 电子书 的子菜单 -->
+  <div class="submenu">
+    <div class="container">
+      <a href="#">小说</a>
+      <div class="submenu">
+        <div class="container">
+          <a href="#">言情小说</a>
+          <a href="#">科幻小说</a>
+          <!-- 根据需要添加更多小说子菜单项 -->
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <a href="#">文学</a>
+      <!-- 根据需要添加 文学 的子菜单项 -->
+    </div>
+    <div class="container">
+      <a href="#">教育读物</a>
+      <div class "submenu">
+        <div class="container">
+          <a href="#">考试用书</a>
+          <a href="#">语言学习</a>
+          <!-- 根据需要添加更多教育读物子菜单项 -->
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <a href="#">电子书</a>
+      <!-- 根据需要添加 电子书 的子菜单项 -->
+    </div>
+  </div>
+</div>
+	  <div class="container">
+  <a href="#">机票 / 酒店 / 旅游 / 生活</a>
+  <!-- 添加 机票 / 酒店 / 旅游 / 生活 的子菜单 -->
+  <div class="submenu">
+    <div class="container">
+      <a href="#">国内机票</a>
+      <div class="submenu">
+        <div class="container">
+          <a href="#">经济舱</a>
+          <a href="#">商务舱</a>
+          <!-- 根据需要添加更多国内机票子菜单项 -->
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <a href="#">国际机票</a>
+      <!-- 根据需要添加 国际机票 的子菜单项 -->
+    </div>
+    <div class="container">
+      <a href="#">酒店预订</a>
+      <div class="submenu">
+        <div class="container">
+          <a href="#">经济型酒店</a>
+          <a href="#">豪华酒店</a>
+          <!-- 根据需要添加更多酒店预订子菜单项 -->
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <a href="#">旅游度假</a>
+      <!-- 根据需要添加 旅游度假 的子菜单项 -->
+    </div>
+    <div class="container">
+      <a href="#">生活服务</a>
+      <div class="submenu">
+        <div class="container">
+          <a href="#">美容美发</a>
+          <a href="#">家政服务</a>
+          <!-- 根据需要添加更多生活服务子菜单项 -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+	 <div class="container">
+  <a href="#">支付 / 白条 / 保险 / 企业金融</a>
+  <!-- 添加 支付 / 白条 / 保险 / 企业金融 的子菜单 -->
+  <div class="submenu">
+    <div class="container">
+      <a href="#">在线支付</a>
+      <div class="submenu">
+        <div class="container">
+          <a href="#">支付宝</a>
+          <a href="#">微信支付</a>
+          <!-- 根据需要添加更多在线支付子菜单项 -->
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <a href="#">信用白条</a>
+      <!-- 根据需要添加 信用白条 的子菜单项 -->
+    </div>
+    <div class="container">
+      <a href="#">保险服务</a>
+      <div class="submenu">
+        <div class="container">
+          <a href="#">健康保险</a>
+          <a href="#">车辆保险</a>
+          <!-- 根据需要添加更多保险服务子菜单项 -->
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <a href="#">企业金融</a>
+      <!-- 根据需要添加 企业金融 的子菜单项 -->
+    </div>
+  </div>
+</div>
+	  <div class="container">
+  <a href="#">安装 / 维修 / 清洗 / 二手</a>
+  <!-- 添加 安装 / 维修 / 清洗 / 二手 的子菜单 -->
+  <div class="submenu">
+    <div class="container">
+      <a href="#">家居安装</a>
+      <div class="submenu">
+        <div class="container">
+          <a href="#">家具安装</a>
+          <a href="#">电器安装</a>
+          <!-- 根据需要添加更多家居安装子菜单项 -->
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <a href="#">维修服务</a>
+      <!-- 根据需要添加 维修服务 的子菜单项 -->
+    </div>
+    <div class="container">
+      <a href="#">清洗服务</a>
+      <div class="submenu">
+        <div class="container">
+          <a href="#">家居清洗</a>
+          <a href="#">车辆清洗</a>
+          <!-- 根据需要添加更多清洗服务子菜单项 -->
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <a href="#">二手交易</a>
+      <!-- 根据需要添加 二手交易 的子菜单项 -->
+    </div>
+  </div>
+</div>
+	 <div class="container">
+  <a href="#">五金机电 / 元器件</a>
+  <!-- 添加 五金机电 / 元器件 的子菜单 -->
+  <div class="submenu">
+    <div class="container">
+      <a href="#">五金工具</a>
+      <div class="submenu">
+        <div class="container">
+          <a href="#">手工工具</a>
+          <a href="#">电动工具</a>
+          <!-- 根据需要添加更多五金工具子菜单项 -->
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <a href="#">电气设备</a>
+      <!-- 根据需要添加 电气设备 的子菜单项 -->
+    </div>
+    <div class="container">
+      <a href="#">元器件</a>
+      <div class="submenu">
+        <div class="container">
+          <a href="#">电阻</a>
+          <a href="#">电容</a>
+          <!-- 根据需要添加更多元器件子菜单项 -->
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <a href="#">安防设备</a>
+      <!-- 根据需要添加 安防设备 的子菜单项 -->
+    </div>
+  </div>
+</div>
+    </nav>
+	</div>
+<div class="damn999">
+<div class="damn2">
+<button class="swr" id="nextImageButton">&gt;</button>
+<button class="swl" id="prevImageButton">&lt;</button>
+  <img src="image.jpg" alt="Image 1">
+  <img src="image2.jpg" alt="Image 2">
+  <img src="image3.jpg" alt="Image 3">
+  <img src="image4.jpg" alt="Image 4">
+  <img src="image5.jpg" alt="Image 5">
+  
+  <!-- 添加更多图片 -->
+</div>
+
+
+
+<div class="damn3">
+<div class="slider-container">
+     <button class="nav-btn prev-btn" onclick="prevSlide()">&#60; </button>
+    <div class="slider">
+	
+      <img src="1.jpg" alt="图像 1">
+      <img src="2.jpg" alt="图像 2">
+      <img src="3.jpg" alt="图像 3">
+      <img src="4.jpg" alt="图像 4">
+      <img src="5.jpg" alt="图像 5">
+      <img src="6.jpg" alt="图像 6">
+      <img src="7.jpg" alt="图像 7">
+      <img src="8.jpg" alt="图像 8">
+      <img src="9.jpg" alt="图像 9">
+      <img src="10.jpg" alt="图像 10">
+      <img src="11.jpg" alt="图像 11">
+      <img src="12.jpg" alt="图像 12">
+	  
+    </div>
+	
+    <button class="nav-btn next-btn" onclick="nextSlide()"> &#62;</button>
+  </div>
+  </div>
+</div>
+ 
+
+
+
+	
+ 
+    
+	<!-- 菜单功能 -->
+    <script>
+   $(document).ready(function () {
+  // 隐藏所有子菜单初始状态
+  $(".submenu").hide();
+
+  $(".container:has('.submenu')").hover(
+    function () {
+      if ($(this).children(".submenu").length > 0) {
+        $(this).children(".submenu").stop().slideDown();
+      }
+    },
+    function () {
+      if ($(this).children(".submenu").length > 0) {
+        $(this).children(".submenu").stop().slideUp();
+      }
+    }
+  );
+
+  // 仅在悬停在 二级菜单时显示第三级子菜单
+  $(".submenu > .container").hover(
+    function () {
+      $(this).find(".submenu").stop().slideDown();
+    },
+    function () {
+      $(this).find(".submenu").stop().slideUp();
+    }
+  );
+});
+</script>
+
+	<!-- 商品搜索 -->
+<script>
+ $(document).ready(function() {
+    $('#searchButton').click(function() {
+        // 假设商品信息在类为 '.damn1' 的元素内
+        var searchTerm = $('input[type="text"]').val();
+        
+        if (searchTerm === '') {
+            alert('请输入关键字！');
+            return;
+        }
+
+        if ($('.damn1:contains('+searchTerm+')').length > 0) {
+            alert('存在商品！');
+        } else {
+            alert('没有这件商品。');
+        }
+    });
+});
+		
+		
+    </script>
+	<!-- 购物车 -->
+<script>
+    $(document).ready(function(){
+      $("#shoppingCart").click(function(){
+        alert("购物车中还没有商品，赶紧选购吧！");
+      });
+    });
+  </script>
+  
+<!-- 图片切换 -->
+<script>
+// 隐藏除第一张图片外的所有图片
+$('.damn2 img:not(:first)').hide();
+
+$(document).ready(function() {
+  var intervalId;
+  var autoSwitchTimer;
+
+  function startAutoSwitch() {
+    autoSwitchTimer = setTimeout(function() {
+      intervalId = setInterval(function() {
+        switchImage(true); // true 表示切换到下一张图片
+      }, 2500); // 设置自动切换间隔，单位为毫秒
+    }, 0); // 将 autoSwitchTimer 的延迟调整为 0，立即执行
+  }
+
+  function stopAutoSwitch() {
+    clearInterval(intervalId);
+    clearTimeout(autoSwitchTimer);
+  }
+
+  function switchImage(next) {
+    var currentImg = $('.damn2 img:visible');
+    var targetImg;
+
+    if (next) {
+      targetImg = currentImg.next('img');
+      if (targetImg.length === 0) {
+        targetImg = $('.damn2 img:first');
+      }
+    } else {
+      targetImg = currentImg.prev('img');
+      if (targetImg.length === 0) {
+        targetImg = $('.damn2 img:last');
+      }
+    }
+
+    // 切换动画
+    currentImg.fadeOut(250, function() {
+      targetImg.fadeIn(300);
+    });
+  }
+
+  // 鼠标悬停时停止自动切换，离开时恢复
+  $('.damn2 img').hover(function() {
+    stopAutoSwitch();
+  }, function() {
+    startAutoSwitch();
+  });
+
+  // 切换到下一张图片的按钮
+  $('#nextImageButton').click(function() {
+    stopAutoSwitch(); // 点击按钮后停止自动切换
+    switchImage(true); // 点击按钮后立即切换图片
+    startAutoSwitch(); // 如果计时器没有立即执行，重新启动自动切换
+  });
+
+  // 切换到上一张图片的按钮
+  $('#prevImageButton').click(function() {
+    stopAutoSwitch(); // 点击按钮后停止自动切换
+    switchImage(false); // 点击按钮后立即切换图片
+    startAutoSwitch(); // 如果计时器没有立即执行，重新启动自动切换
+  });
+
+  // 开始自动切换
+  startAutoSwitch();
+});
+</script>
+
+
+<!-- 多张图片切换 -->
+
+
+   <script src="jquery-3.6.0.min.js"></script>
+  <script>
+  $(document).ready(function() {
+  var slider = $('.slider');
+  var slideWidth = $('.slider-container').width();
+  var currentSlide = 0;
+
+  function prevSlide() {
+    var totalSlides = slider.children().length;
+    var visibleSlides = Math.floor($('.slider-container').width() / $('.slider img').width());
+    var maxSlides = Math.ceil(totalSlides / visibleSlides);
+
+    if (currentSlide > 0) {
+      currentSlide--;
+      slider.css('transform', 'translateX(' + (-slideWidth * currentSlide) + 'px)');
+    } else {
+      currentSlide = maxSlides - 1;
+      slider.css('transform', 'translateX(' + (-slideWidth * currentSlide) + 'px)');
+    }
+  }
+
+  function nextSlide() {
+    var totalSlides = slider.children().length;
+    var visibleSlides = Math.floor($('.slider-container').width() / $('.slider img').width());
+    var maxSlides = Math.ceil(totalSlides / visibleSlides);
+
+    if (currentSlide < maxSlides - 1) {
+      currentSlide++;
+      slider.css('transform', 'translateX(' + (-slideWidth * currentSlide) + 'px)');
+    } else {
+      currentSlide = 0;
+      slider.css('transform', 'translateX(' + (-slideWidth * currentSlide) + 'px)');
+    }
+  }
+
+  window.prevSlide = prevSlide;
+  window.nextSlide = nextSlide;
+});
+    </script>
+	
+	<!-- 点击logo刷新页面 -->
+	 <script>
+    // jQuery 代码
+    $(document).ready(function() {
+      // 为 logo 元素添加点击事件
+      $("#logo").click(function() {
+        location.reload(true); // 设置为 true 表示强制从服务器加载页面，不使用缓存
+      });
+    });
+  </script>
+  
+  
+</body>
+</html>
