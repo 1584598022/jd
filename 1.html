@@ -1095,13 +1095,16 @@ $('.damn2 img:not(:first)').hide();
 $(document).ready(function() {
   var intervalId;
   var autoSwitchTimer;
+  var isAnimating = false; // 新增一个标志，用于判断是否处于动画中
 
   function startAutoSwitch() {
     autoSwitchTimer = setTimeout(function() {
       intervalId = setInterval(function() {
-        switchImage(true); // true 表示切换到下一张图片
-      }, 2500); // 设置自动切换间隔，单位为毫秒
-    }, 0); // 将 autoSwitchTimer 的延迟调整为 0，立即执行
+        if (!isAnimating) { // 仅在非动画状态下才执行切换
+          switchImage(true);
+        }
+      }, 2500);
+    }, 0);
   }
 
   function stopAutoSwitch() {
@@ -1110,6 +1113,12 @@ $(document).ready(function() {
   }
 
   function switchImage(next) {
+    if (isAnimating) {
+      return; // 如果正在执行动画，直接返回，避免触发新的切换
+    }
+
+    isAnimating = true; // 设置动画标志为 true
+
     var currentImg = $('.damn2 img:visible');
     var targetImg;
 
@@ -1127,7 +1136,9 @@ $(document).ready(function() {
 
     // 切换动画
     currentImg.fadeOut(250, function() {
-      targetImg.fadeIn(300);
+      targetImg.fadeIn(300, function() {
+        isAnimating = false; // 动画完成后，将动画标志重置为 false
+      });
     });
   }
 
